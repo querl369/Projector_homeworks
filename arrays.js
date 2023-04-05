@@ -12,12 +12,10 @@ if (userNames.length > 0 && userNames !== undefined) {
 		let element = userNames[i].split(' ');
 			for (var n = 0; n < element.length; n++) {
 			strInitial += element[n][0] + '.';
-			console.log(strInitial);
 		}
 	initialsShorten.push(strInitial);
 	}
 	initials = [...initialsShorten.sort()];
-	console.log(initials);
 }
 
 console.log(initialsShorten);
@@ -55,7 +53,7 @@ function countSubArrays(arr) {
 
 countSubArrays(resultsArray);
 
-flatArray = resultsArray.flat(count);
+const flatArray = resultsArray.flat(count);
 let multipliedValues = 1;
 
 for (let i = 0; i < flatArray.length; i++) {
