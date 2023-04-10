@@ -13,7 +13,7 @@ if (userNames.length > 0 && userNames !== undefined) {
 			strInitial += element[n][0] + '.';
 		}
 
-	initials.push(strInitial);
+		initials.push(strInitial);
 
 	}
 
