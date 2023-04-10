@@ -94,3 +94,12 @@ for (let i = 0; i < flatArray.length; i++) {
 productOfArray = multipliedValues;
 
 console.log(productOfArray); // 24
+
+//OR
+const resultsArray1 = [1, 2, [3, [4]]];
+
+let productOfArray1;
+
+productOfArray1 = resultsArray1.flat(Infinity).reduce((all, next) => all * next, 1);
+
+console.log(productOfArray1); // 24
