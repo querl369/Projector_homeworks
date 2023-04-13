@@ -12,23 +12,24 @@
 */
 
 function durationBetweenDates(startDate = new Date(), endDate = new Date(), dimension = 'seconds') {
-  const start = new Date(startDate);
-  const end = new Date(endDate);
-  const diff = Math.abs(start - end);
+  const timeDifference = Math.abs(new Date(startDate) - new Date(endDate));
   let result;
 
   switch (dimension) {
+    case 'years':
+      result = Math.floor(timeDifference / (1000 * 60 * 60 * 24 * 365));
+      break;
     case 'days':
-      result = Math.floor(diff / (1000 * 60 * 60 * 24));
+      result = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
       break;
     case 'hours':
-      result = Math.floor(diff / (1000 * 60 * 60));
+      result = Math.floor(timeDifference / (1000 * 60 * 60));
       break;
     case 'minutes':
-      result = Math.floor(diff / (1000 * 60));
+      result = Math.floor(timeDifference / (1000 * 60));
       break;
     default:
-      result = diff / 1000;
+      result = timeDifference / 1000;
       break;
   }
 
