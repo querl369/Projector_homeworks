@@ -108,23 +108,3 @@ function byProperty(property, direction = '>') {
 console.log(movies.sort(byProperty('releaseYear', '>'))); *// виведе масив фільмів посортованих по року випуску, від старішого до новішого*
 console.log(movies.sort(byProperty('runningTimeInMinutes', '<'))); *// виведе масив фільмів посортованих по їх тривалості, від найдовшого до найкоротшого*
 console.log(movies.sort(byProperty('movieName', '>'))); *// виведе масив фільмів посортованих по назві, в алфавітному порядку*
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
