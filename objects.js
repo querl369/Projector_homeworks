@@ -11,7 +11,27 @@
 	durationBetweenDates('31 Jan 2022', '03 Feb 2021', 'days') // поверне '362 days'
 */
 
+function validateDate(date) {
+   const dateToValidate = Date.parse(date);
+   console.log(dateToValidate);
+   const isInvalid = isNaN(dateToValidate);
+   return !isInvalid;
+}
+
+function formarDate(value, unit) {
+   return `${value} ${unit}`
+}
+
 function durationBetweenDates(startDate = new Date(), endDate = new Date(), dimension = 'seconds') {
+	if (!validateDate(startDate) || !validateDate(endDate)) {
+		 return 'Invalid date'
+	}
+
+	const validDimensions = ['seconds', 'years', 'hours', 'minutes', 'days'];
+	if (!validDimensions.includes(dimension)) {
+		return 'Invalid dimension';
+	}
+
   const timeDifference = Math.abs(new Date(startDate) - new Date(endDate));
   let result;
 
@@ -33,7 +53,7 @@ function durationBetweenDates(startDate = new Date(), endDate = new Date(), dime
       break;
   }
 
-  return `${result} ${dimension}`; // decided to add year, period in years could be calculated (without a leap year)
+  return formarDate(result, dimension); // decided to add year, period in years could be calculated (without a leap year)
 }
 
 /*
@@ -55,12 +75,14 @@ function durationBetweenDates(startDate = new Date(), endDate = new Date(), dime
 	console.log(updatedPriceData)    // {apples: '23.40', bananas: '48.00', oranges: '48.76'}
 */
 
-function updatedPriceData(priceData) {
-	const newObj = {};
+function optimizer(priceData) {
+	const result = {};
+
 	for (let key in priceData) {
-		newObj[key.charAt(0).toUpperCase() + key.slice(1).toLowerCase()] = parseFloat(priceData[`${key}`]).toFixed(2);
+		newObj[key.toLowerCase()] = parseFloat(priceData[key]).toFixed(2);
 	}
-	return newObj; // decided to make key name more prettier by capitalize first letter
+
+	return result;
 }
 
 /* 
@@ -83,34 +105,52 @@ function updatedPriceData(priceData) {
 */
 
 function iterativeOddSumTo(iterateNumber) {
+	if (typeof iterateNumber !== 'number' || isNaN(iterateNumber)) {
+		return 'Invalid number';
+	}
+
 	let evenNumbersCounter = 0;
+
 	for (let i = 0; i <= iterateNumber; i++) {
 		if (i % 2 !== 0) {
 			evenNumbersCounter += i;
 		}
 	}
+
 	return evenNumbersCounter;
 }
 
 // OR
 
 function iterativeOddSumTo(iterateNumber) {
+	if (typeof iterateNumber !== 'number' || isNaN(iterateNumber)) {
+		return 'Invalid number';
+	}
+
 	let evenNumbersCounter = 0;
+
 	for (let i = 1; i <= iterateNumber; i += 2) {
 		evenNumbersCounter += i;
 	}
+
 	return evenNumbersCounter;
 }
 
 // Recursion
 
 function recursiveOddSumTo(iterateNumber) {
+	if (typeof iterateNumber !== 'number' || isNaN(iterateNumber)) {
+		return 'Invalid number';
+	}
+
   if (iterateNumber < 1) {
     return 0;
   }
+
   if (iterateNumber % 2 !== 0) {
     return iterateNumber + recursiveOddSumTo(iterateNumber - 2);
-  } else {
-    return recursiveOddSumTo(iterateNumber - 1);
   }
+   
+  return recursiveOddSumTo(iterateNumber - 1);
+
 }
