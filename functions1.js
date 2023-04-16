@@ -8,7 +8,6 @@ function addThemAll(...values) {
 	if (values.length === 0 || (values.join('')).includes('NaN') || values.join('') === '') {
 
 		return 'Please set valid value';
-
 	}
 	const sumValues = values.reduce((acc, value) => acc + parseFloat(value), 0);
 
@@ -21,7 +20,6 @@ const sumValues = (...values) => {
 	if (values.length === 0 || (values.join('')).includes('NaN') || values.join('') === '') {
 
 		return 'Please set valid value';
-
 	}
 
 	return values.reduce((acc, value) => acc + parseFloat(value), 0);
@@ -76,6 +74,7 @@ function multiply(a) {
 	const firstValue = a;
 
 	return function(b) {
+
 		if (!parseFloat(b) || b === '') {
 			return 'The value is not a number';
 		}
@@ -123,17 +122,40 @@ runningTimeInMinutes: 107,
 },
 ];
 
+function validateParameters(property, direction) {
+	if (!property) {
+
+		return true;
+	}
+	if (property === 'undefined') {
+
+		return true;
+	}
+	if (direction !== '<' || direction !== '>') {
+
+		return true;	
+	}
+}
+
 function byProperty(property, direction = '>') {
-  return function(firstElement, secondElement) {
+	/*
+	if (validateParameters(property, direction)) {
+
+		return 'Incorrect value';
+	}
+	*/
+
+	return function(firstElement, secondElement) {
     const firstValue = firstElement[property];
     const secondValue = secondElement[property];
     const result = firstValue < secondValue ? -1 : firstValue > secondValue ? 1 : 0;
     
     if (direction === '<') {
+
       return -result;
-    } else {
-      return result;
     }
+
+    return result;
   }
 }
 
