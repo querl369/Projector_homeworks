@@ -139,6 +139,9 @@ function validateParameters(property, direction) {
 
 function byProperty(property, direction = '>') {
 	/*
+	these checks doesn't work, commented until find a solution
+
+
 	if (validateParameters(property, direction)) {
 
 		return 'Incorrect value';
