@@ -4,37 +4,45 @@
 	Використайте оператор розширення:
 */
 
-function addThemAll(...values) {
-	if (values.length === 0 || (values.join('')).includes('NaN') || values.join('') === '') {
+function checkIsNumberValid(number) {
+	const isNumber = typeof number === 'number';
+	const isString = typeof number === 'string';
+	const parsedValue = parseFloat(number);
+	const isNumberValid = !isNaN(parsedValue);
 
-		return 'Please set valid value';
+	return (isNumber || isString) && isNumberValid;
+}
+
+function addThemAll(...values) {
+	if (values.length === 0) {
+		return 0;
 	}
-	const sumValues = values.reduce((acc, value) => acc + parseFloat(value), 0);
+
+	const sumValues = values.reduce((acc, value) => {
+		if (!checkIsNumberValid(value)) {
+			return acc;
+		}
+		return acc + parseFloat(value);
+	}, 0);
 
 	return sumValues;
 }
 
-// OR
-
-const sumValues = (...values) => {
-	if (values.length === 0 || (values.join('')).includes('NaN') || values.join('') === '') {
-
-		return 'Please set valid value';
-	}
-
-	return values.reduce((acc, value) => acc + parseFloat(value), 0);
-}
 
 // OR
 
 function addThemAll1(...values) {
-	if (values.length === 0 || (values.join('')).includes('NaN') || values.join('') === '') {
-
-		return 'Please set valid value';
+	if (values.length === 0) {
+		return 0;
 	}
+
 	let sumValues = 0;
 
 	for (let i = 0; i < values.length; i++) {
+		if (!checkIsNumberValid(values[i])) {
+			continue;
+		}
+
 		sumValues += parseFloat(values[i]);
 	}
 
@@ -44,13 +52,17 @@ function addThemAll1(...values) {
 // OR
 
 function addThemAll2(...values) {
-	if (values.length === 0 || (values.join('')).includes('NaN') || values.join('') === '') {
-
-		return 'Please set valid value';
+	if (values.length === 0) {
+		return 0;
 	}
+
 	let sumValues = 0;
 
 	for (let value of values) {
+		if (!checkIsNumberValid(value)) {
+			continue;
+		}
+
 		sumValues += parseFloat(value);
 	}
 
@@ -68,19 +80,16 @@ console.log(addThemAll(5,5,10)); *// 20*
 */
 
 function multiply(a) {
-	if (!parseFloat(a) || a === '') {
+	if (!checkIsNumberValid(a)) {
 		return 'The value is not a number';
 	}
-	const firstValue = a;
 
 	return function(b) {
-
-		if (!parseFloat(b) || b === '') {
+		if (!checkIsNumberValid(b)) {
 			return 'The value is not a number';
 		}
-		const secondValue = b;
 
-		return firstValue * secondValue; 
+		return a * b; 
 	}
 }
 
@@ -122,32 +131,8 @@ runningTimeInMinutes: 107,
 },
 ];
 
-function validateParameters(property, direction) {
-	if (!property) {
-
-		return true;
-	}
-	if (property === 'undefined') {
-
-		return true;
-	}
-	if (direction !== '<' || direction !== '>') {
-
-		return true;	
-	}
-}
 
 function byProperty(property, direction = '>') {
-	/*
-	these checks doesn't work, commented until find a solution
-
-
-	if (validateParameters(property, direction)) {
-
-		return 'Incorrect value';
-	}
-	*/
-
 	return function(firstElement, secondElement) {
     const firstValue = firstElement[property];
     const secondValue = secondElement[property];
@@ -161,6 +146,47 @@ function byProperty(property, direction = '>') {
     return result;
   }
 }
+
+//OR
+
+const SORT_ORDER_PROPERTIES = {
+      ASC: '>',
+      DESC: '<'
+}
+
+const SORT_ORDER = {
+   [SORT_ORDER_PROPERTIES.ASC]: 1,
+   [SORT_ORDER_PROPERTIES.DESC]: -1,
+}
+
+const SORT_BY_PROPERTIES = {
+   NAME: 'NAME',
+   DURATION: 'DURATION',
+   DIRECTOR: 'DIRECTOR',
+   RELEASE: 'RELEASE',
+}
+
+const SORT_BY = {
+   [SORT_ORDER_PROPERTIES.NAME]: 'movieName',
+   [SORT_ORDER_PROPERTIES.DURATION]: 'runningTimeInMinutes',
+   [SORT_ORDER_PROPERTIES.DIRECTOR]: 'directedBy',
+   [SORT_ORDER_PROPERTIES.RELEASE]: 'releaseYear',
+}
+
+function byProperty(property = SORT_BY_PROPERTIES.NAME, direction = SORT_ORDER_PROPERTIES.ASC) {
+   const list = movies.slice();
+   const sortOrder = SORT_ORDER[direction];
+   const key = SORT_BY[property];
+  
+   list.sort((a, b) => {
+      return (a[key] > b[key]) ? sortOrder : -1 * sortOrder;
+   });
+
+   return list;
+}
+
+
+
 
 console.log(movies.sort(byProperty('releaseYear', '>'))); // виведе масив фільмів посортованих по року випуску, від старішого до новішого*
 console.log(movies.sort(byProperty('runningTimeInMinutes', '<'))); // виведе масив фільмів посортованих по їх тривалості, від найдовшого до найкоротшого*
