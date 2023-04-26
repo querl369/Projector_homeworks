@@ -167,10 +167,10 @@ const SORT_BY_PROPERTIES = {
 }
 
 const SORT_BY = {
-   [SORT_ORDER_PROPERTIES.NAME]: 'movieName',
-   [SORT_ORDER_PROPERTIES.DURATION]: 'runningTimeInMinutes',
-   [SORT_ORDER_PROPERTIES.DIRECTOR]: 'directedBy',
-   [SORT_ORDER_PROPERTIES.RELEASE]: 'releaseYear',
+   [SORT_BY_PROPERTIES.NAME]: 'movieName',
+   [SORT_BY_PROPERTIES.DURATION]: 'runningTimeInMinutes',
+   [SORT_BY_PROPERTIES.DIRECTOR]: 'directedBy',
+   [SORT_BY_PROPERTIES.RELEASE]: 'releaseYear',
 }
 
 function byProperty(property = SORT_BY_PROPERTIES.NAME, direction = SORT_ORDER_PROPERTIES.ASC) {
