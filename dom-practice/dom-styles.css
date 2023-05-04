@@ -3,32 +3,34 @@ html, body {
     height: 100%;
   }
 
-  /* h1 {
+  h1 {
     text-align: center;
     font-family: 'Roboto Slab', serif;
     color: #353535;
     font-size: 50px;
-  } */
+  }
+
+  .frame {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+  }
+  
+  button {
+    margin: 20px 0;
+  }
   
   p {
+    /* margin-top: 20px; */
     font-family: "Andale Mono", monospace;
     font-weight: 300;
-    text-align: center;
     font-size: 18px;
     color: #676767;
   }
 
-  .frame {
-    width: 100%;
-    height: 100%;
-    text-align: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  button {
-    margin: 20px;
-  }
   .custom-btn {
     width: 200px;
     height: 50px;
