@@ -11,11 +11,12 @@ class LivingBeing {
 
 // Наслідування класів від класу-предка
 class Dog extends LivingBeing {
+  #isPlayful;
   constructor(name, breed, age, playful) {
     super(name);
     this.breed = breed;
     this.age = age;
-    this._isPlayful = playful;
+    this.#isPlayful = playful;
   }
 
   bark() {
@@ -27,17 +28,19 @@ class Dog extends LivingBeing {
   }
 
   get isPlayful() {
-    return this._isPlayful;
+    console.log(this.#isPlayful);
+    return this.#isPlayful;
   }
 }
 
 // Наслідування класів від класу-предка
 class Cat extends LivingBeing {
+  #isHungry;
   constructor(name, breed, color, hungry) {
     super(name);
     this.breed = breed;
     this.color = color;
-    this._isHungry = hungry;
+    this.#isHungry = hungry;
 
   }
 
@@ -50,7 +53,8 @@ class Cat extends LivingBeing {
   }
 
   get isHungry() {
-    return this._isHungry;
+    console.log(this.#isHungry);
+    return this.#isHungry;
   }
 }
 
@@ -104,11 +108,13 @@ const dog = new Dog('Rex', 'German Shepherd', 3, false);
 dog.move();
 dog.bark();
 dog.wagTail();
+dog.isPlayful;
 
 const cat = new Cat('Lucy', 'Persian', 'White', true);
 cat.move();
 cat.meow();
 cat.scratch();
+cat.isHungry;
 
 const parrot = new Parrot('Polly', 'John', 'John Malkovich');
 parrot.move();
